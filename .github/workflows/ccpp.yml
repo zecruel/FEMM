@@ -6,7 +6,7 @@ jobs:
   win-vcpkg:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4.1.1
 
     - uses: lukka/get-cmake@latest
 
@@ -19,7 +19,7 @@ jobs:
         dir
         7z a windows_msvc.zip .\build_win_release64
 
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4.3.0
       with:
         name: FEMM-windows
         path: windows_msvc.zip

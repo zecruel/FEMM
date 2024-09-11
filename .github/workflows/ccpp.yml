@@ -1,9 +1,6 @@
 name: FEMM Continuous Integration
 
-on:
-  push:
-  pull_request:
-  workflow_dispatch:
+on: workflow_dispatch
 
 jobs:
   win-vcpkg:
@@ -15,13 +12,15 @@ jobs:
 
     - name: 'Build FEMM'
       shell: pwsh
-      run: ${{ github.workspace }}/build.ps1 -DoNotUpdateTOOL -DisableInteractive -DisableLaTeX -ForceTriangle32bit
+      run: ${{ github.workspace }}/build.ps1 -DoNotUpdateTOOL -DisableInteractive -DisableLaTeX -ForceTriangle32bit -DoNotDeleteBuildFolder
 
     - name: 'Build Installer'
-      shell: pwsh
-      run: makensis.exe ${{ github.workspace }}/script.nsi
+      run: |
+        dir
+        7z a windows_msvc.zip .\build_win_release64
 
     - uses: actions/upload-artifact@v2
       with:
         name: FEMM-windows
-        path: ${{ github.workspace }}/FEMM_installer.exe
+        path: windows_msvc.zip
+        retention-days: 5

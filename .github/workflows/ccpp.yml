@@ -12,7 +12,7 @@ jobs:
 
     - name: 'Build FEMM'
       shell: pwsh
-      run: ${{ github.workspace }}/build.ps1 -DoNotUpdateTOOL -DisableInteractive -DisableLaTeX -ForceTriangle32bit -DoNotDeleteBuildFolder
+      run: ${{ github.workspace }}/build.ps1 -DoNotUpdateTOOL -DisableInteractive -DisableLaTeX -DoNotDeleteBuildFolder
 
     - name: 'Build Installer'
       run: |
